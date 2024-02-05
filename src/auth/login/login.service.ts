@@ -1,20 +1,20 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from '../user/user.service';
-import { LoginUserDto } from '../dto/auth.dto';
 import { appConstants } from 'src/common/constants';
-import { User } from '../user/schema/users.schema';
+import { LoginUserDto } from './dto/logindto';
+import { Signup } from '../signup/schema/signup.schema';
+import { SignupService } from '../signup/signup.service';
 
 @Injectable()
-export class AuthService {
+export class LoginService {
   constructor(
-    private readonly usersService: UserService,
+    private readonly signupService: SignupService,
     private jwtService: JwtService,
   ) {}
-  async validateUser(username: string, password: string): Promise<User> {
+  async validateUser(username: string, password: string): Promise<Signup> {
     try {
-      const user = await this.usersService.getUser({ username });
+      const user = await this.signupService.getUser({ username });
 
       if (!user) {
         throw new NotAcceptableException(appConstants.errorMessage.NotFindUser);

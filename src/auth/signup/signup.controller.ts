@@ -1,22 +1,23 @@
 import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { UserService } from './user.service';
-import { User } from './schema/users.schema';
-import { CreateUserDto } from '../dto/auth.dto';
+import { CreateUserDto } from './dto/signup.dto';
+import { Signup } from './schema/signup.schema';
+import { SignupService } from './signup.service';
+
 
 @Controller('auth')
-export class UserController {
-  constructor(private readonly usersService: UserService) {}
+export class SignupController {
+  constructor(private readonly signupService: SignupService) {}
 
   @Post('/signup')
-  async createUser(
+  async Signup(
     @Body() userData: CreateUserDto,
-  ): Promise<User> {
+  ): Promise<Signup> {
     const saltOrRounds = parseInt(process.env.SALT_OR_ROUNDS);  
     const username = userData.username;
     const password = userData.password;
     const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-    const result = await this.usersService.createUser(username, hashedPassword);
+    const result = await this.signupService.signup(username, hashedPassword);
     return result;
   }
 }

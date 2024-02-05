@@ -1,15 +1,15 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User, UserDocument } from './schema/users.schema';
 import { DUPLICATE_KEY_ERROR_ALT_CODE, DUPLICATE_KEY_ERROR_CODE, appConstants } from 'src/common/constants';
+import { Signup, UserDocument } from './schema/signup.schema';
 
 @Injectable()
-export class UserService {
+export class SignupService {
   constructor(
     @InjectModel('user') private readonly userModel: Model<UserDocument>,
   ) {}
-  async createUser(username: string, password: string): Promise<User> {
+  async signup(username: string, password: string): Promise<Signup> {
     try {
       const newUser = await this.userModel.create({
         username,
@@ -25,7 +25,7 @@ export class UserService {
     }
   }
 
-  async getUser(query: {}): Promise<User> {
+  async getUser(query: {}): Promise<Signup> {
     try {
       const user = await this.userModel.findOne(query);
       if (!user) {

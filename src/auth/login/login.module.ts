@@ -1,18 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
-import { UserService } from '../user/user.service';
-import { UserModule } from '../user/user.module';
+import { LoginService } from './login.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from '../user/schema/users.schema';
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigService } from '@nestjs/config';
+import { LoginController } from './login.controller';
+import { SignupModule } from '../signup/signup.module';
+import { SignupSchema } from '../signup/schema/signup.schema';
+import { SignupService } from '../signup/signup.service';
 
 @Module({
   imports: [
-    UserModule,
+    SignupModule,
     PassportModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
@@ -25,9 +25,9 @@ import { ConfigService } from '@nestjs/config';
         };
       },
     }),
-    MongooseModule.forFeature([{ name: "user", schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: "user", schema: SignupSchema }]),
   ],
-  providers: [AuthService, UserService, JwtStrategy],
-  controllers: [AuthController]
+  providers: [LoginService, SignupService, JwtStrategy],
+  controllers: [LoginController]
 })
-export class AuthModule {}
+export class LoginModule {}
