@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/signup.dto';
-import { Signup } from './schema/signup.schema';
+import { User } from '../../schema/user.schema';
 import { SignupService } from './signup.service';
 
 
@@ -12,7 +12,7 @@ export class SignupController {
   @Post('/signup')
   async Signup(
     @Body() userData: CreateUserDto,
-  ): Promise<Signup> {
+  ): Promise<User> {
     const saltOrRounds = parseInt(process.env.SALT_OR_ROUNDS);  
     const username = userData.username;
     const password = userData.password;

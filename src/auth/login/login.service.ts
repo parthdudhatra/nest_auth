@@ -1,9 +1,9 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { appConstants } from 'common/constants';
-import { LoginUserDto } from './dto/logindto';
-import { Signup } from '../signup/schema/signup.schema';
+import { appConstants } from 'src/common/constants';
+import { LoginUserDto } from './dto/login.dto';
+import { User } from '../../schema/user.schema';
 import { SignupService } from '../signup/signup.service';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class LoginService {
     private readonly signupService: SignupService,
     private jwtService: JwtService,
   ) {}
-  async validateUser(username: string, password: string): Promise<Signup> {
+  async validateUser(username: string, password: string): Promise<User> {
     try {
       const user = await this.signupService.getUser({ username });
 

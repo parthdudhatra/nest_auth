@@ -3,12 +3,13 @@ import { LoginService } from './login.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
-import { JwtStrategy } from './jwt.strategy';
+import { JwtStrategy } from '../../middleware/jwt.strategy';
 import { ConfigService } from '@nestjs/config';
 import { LoginController } from './login.controller';
 import { SignupModule } from '../signup/signup.module';
-import { SignupSchema } from '../signup/schema/signup.schema';
+import { userSchema } from '../../schema/user.schema';
 import { SignupService } from '../signup/signup.service';
+import { appConstants } from 'src/common/constants';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { SignupService } from '../signup/signup.service';
         };
       },
     }),
-    MongooseModule.forFeature([{ name: "user", schema: SignupSchema }]),
+    MongooseModule.forFeature([{ name: appConstants.tableCollectionName.USER, schema: userSchema }]),
   ],
   providers: [LoginService, SignupService, JwtStrategy],
   controllers: [LoginController]

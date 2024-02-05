@@ -9,8 +9,11 @@ export const appConstants = {
         NotFindUser: "Could not find the user",
         InvalidPassword : "Invalid password",
         UserNotFound : 'User not found'
-    }
+    },
     
+    tableCollectionName : {
+        USER : 'user'
+    }
 }
 
 export const DUPLICATE_KEY_ERROR_CODE = 11000;

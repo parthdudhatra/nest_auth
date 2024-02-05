@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SignupService } from './signup.service';
 import { SignupController } from './signup.controller';
-import { SignupSchema } from './schema/signup.schema';
+import { userSchema } from '../../schema/user.schema';
+import { appConstants } from 'src/common/constants';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'user', schema: SignupSchema }])],
+  imports: [MongooseModule.forFeature([{ name: appConstants.tableCollectionName.USER, schema: userSchema }])],
   providers: [SignupService],
   controllers: [SignupController],
 })
