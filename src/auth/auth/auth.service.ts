@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { LoginUserDto } from '../dto/auth.dto';
 import { appConstants } from 'src/common/constants';
+import { User } from '../user/schema/users.schema';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,7 @@ export class AuthService {
     private readonly usersService: UserService,
     private jwtService: JwtService,
   ) {}
-  async validateUser(username: string, password: string): Promise<any> {
+  async validateUser(username: string, password: string): Promise<User> {
     try {
       const user = await this.usersService.getUser({ username });
 
