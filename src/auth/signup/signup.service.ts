@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { DUPLICATE_KEY_ERROR_ALT_CODE, DUPLICATE_KEY_ERROR_CODE, appConstants } from 'src/common/constants';
+import { DUPLICATE_KEY_ERROR_ALT_CODE, DUPLICATE_KEY_ERROR_CODE, appConstants } from 'common/constants';
 import { Signup, UserDocument } from './schema/signup.schema';
 
 @Injectable()

@@ -1,7 +1,7 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { appConstants } from 'src/common/constants';
+import { appConstants } from 'common/constants';
 import { LoginUserDto } from './dto/logindto';
 import { Signup } from '../signup/schema/signup.schema';
 import { SignupService } from '../signup/signup.service';
