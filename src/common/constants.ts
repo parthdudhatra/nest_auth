@@ -10,4 +10,8 @@ export const appConstants = {
         InvalidPassword : "Invalid password",
         UserNotFound : 'User not found'
     }
+    
 }
+
+export const DUPLICATE_KEY_ERROR_CODE = 11000;
+export const DUPLICATE_KEY_ERROR_ALT_CODE = 11001;

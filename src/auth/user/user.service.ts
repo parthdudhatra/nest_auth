@@ -2,7 +2,7 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from './schema/users.schema';
-import { appConstants } from 'src/common/constants';
+import { DUPLICATE_KEY_ERROR_ALT_CODE, DUPLICATE_KEY_ERROR_CODE, appConstants } from 'src/common/constants';
 
 @Injectable()
 export class UserService {
@@ -17,7 +17,7 @@ export class UserService {
       });
       return newUser;
     } catch (error) {
-      if (error.code === 11000 || error.code === 11001) {
+      if (error.code === DUPLICATE_KEY_ERROR_CODE || error.code === DUPLICATE_KEY_ERROR_ALT_CODE) {
         throw new ConflictException(appConstants.errorMessage.UsernameIsAlready);
       } else {
         throw error;
