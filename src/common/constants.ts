@@ -10,11 +10,13 @@ export const appConstants = {
         InvalidPassword : "Invalid password",
         UserNotFound : 'User not found'
     },
-    
-    tableCollectionName : {
-        USER : 'user'
-    }
 }
 
-export const DUPLICATE_KEY_ERROR_CODE = 11000;
-export const DUPLICATE_KEY_ERROR_ALT_CODE = 11001;
+export const CollectionName = {
+    USER: 'user'
+}
+
+export const ERROR_CODE = {
+    DUPLICATE_KEY_ERROR_CODE : 11000,
+    DUPLICATE_KEY_ERROR_ALT_CODE: 11001
+}
