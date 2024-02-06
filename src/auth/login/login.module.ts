@@ -9,7 +9,7 @@ import { LoginController } from './login.controller';
 import { SignupModule } from '../signup/signup.module';
 import { userSchema } from '../../schema/user.schema';
 import { SignupService } from '../signup/signup.service';
-import { CollectionName, appConstants } from 'src/common/constants';
+import { Collection } from 'src/common/constants';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import { CollectionName, appConstants } from 'src/common/constants';
         };
       },
     }),
-    MongooseModule.forFeature([{ name: CollectionName.USER, schema: userSchema }]),
+    MongooseModule.forFeature([{ name: Collection.USER, schema: userSchema }]),
   ],
   providers: [LoginService, SignupService, JwtStrategy],
   controllers: [LoginController]

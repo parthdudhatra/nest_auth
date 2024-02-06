@@ -1,7 +1,7 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { appConstants } from 'src/common/constants';
+import { statusMessage } from 'src/common/constants';
 import { LoginUserDto } from './dto/login.dto';
 import { User } from '../../schema/user.schema';
 import { SignupService } from '../signup/signup.service';
@@ -17,14 +17,14 @@ export class LoginService {
       const user = await this.signupService.getUser({ username });
 
       if (!user) {
-        throw new NotAcceptableException(appConstants.errorMessage.NotFindUser);
+        throw new NotAcceptableException(statusMessage.errorMessage.NotFindUser);
       }
 
       const passwordValid = await bcrypt.compare(password, user.password);
 
       if (!passwordValid) {
         throw new NotAcceptableException(
-          appConstants.errorMessage.InvalidPassword,
+          statusMessage.errorMessage.InvalidPassword,
         );
       }
 
@@ -36,7 +36,7 @@ export class LoginService {
   async login(user: LoginUserDto) {
     const payload = { username: user.username, sub: user._id };
     return {
-      message: appConstants.successMessage.LoginSuccess,
+      message: statusMessage.successMessage.LoginSuccess,
       access_token: this.jwtService.sign(payload),
     };
   }

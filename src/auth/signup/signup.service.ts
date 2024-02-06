@@ -1,14 +1,13 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CollectionName, ERROR_CODE, appConstants } from 'src/common/constants';
+import { Collection, ERROR_CODE, statusMessage } from 'src/common/constants';
 import { User, UserDocument } from '../../schema/user.schema';
-import { CreateUserDto } from './dto/signup.dto';
 
 @Injectable()
 export class SignupService {
   constructor(
-    @InjectModel(CollectionName.USER) private readonly userModel: Model<UserDocument>,
+    @InjectModel(Collection.USER) private readonly userModel: Model<UserDocument>,
   ) {}
   async signup(username: string, password: string): Promise<User> {
     try {
@@ -19,7 +18,7 @@ export class SignupService {
       return newUser;
     } catch (error) {
       if (error.code === ERROR_CODE.DUPLICATE_KEY_ERROR_CODE || error.code === ERROR_CODE.DUPLICATE_KEY_ERROR_ALT_CODE) {
-        throw new ConflictException(appConstants.errorMessage.UsernameIsAlready);
+        throw new ConflictException(statusMessage.errorMessage.UsernameIsAlready);
       } else {
         throw error;
       }
@@ -30,7 +29,7 @@ export class SignupService {
     try {
       const user = await this.userModel.findOne(query);
       if (!user) {
-        throw new NotFoundException(appConstants.errorMessage.UserNotFound);
+        throw new NotFoundException(statusMessage.errorMessage.UserNotFound);
       }
       return user;
     } catch (error) {

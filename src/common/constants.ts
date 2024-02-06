@@ -1,4 +1,4 @@
-export const appConstants = {
+export const statusMessage = {
     successMessage: {
        LoginSuccess: "Login successfully",
        SignUpSuccess: "Sign up successfully"
@@ -12,7 +12,7 @@ export const appConstants = {
     },
 }
 
-export const CollectionName = {
+export const Collection = {
     USER: 'user'
 }
 
